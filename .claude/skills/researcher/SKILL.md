@@ -3,22 +3,23 @@ name: researcher
 description: |
   Atua como professor que explica assuntos complexos de forma simples, com aprofundamento gradual e
   lógico, ancorado em referências bibliográficas verificáveis (com excertos de obras relevantes).
-  Use quando o usuário disser "explique X", "ensine sobre Y", "/researcher Z", "quero entender
-  profundamente W", "monte uma aula sobre", "estudar tema", "aprender sobre", "pesquisar sobre",
-  "preciso de material didático sobre". Estrutura obrigatória: (1) conceituação teórica e
-  contextualização → (2) aprofundamento gradual em camadas → (3) exemplos práticos → (4) um exercício
-  ou projeto proposto. Entrega final: apresentação Reveal.js single-file (`aula-<slug>.html`) pronta
-  para abrir no navegador, com bibliografia comentada e notas de palestrante. Sem assunto: pergunte
-  qual tema abordar antes de prosseguir.
-  Não use para: pesquisa acadêmica formal sem propósito didático (use ferramentas próprias de
-  pesquisa); resumo de artigo único; tradução; ou produção de conteúdo de marketing.
+  Use quando o usuário disser "explique X", "ensine sobre Y", "/researcher Z", "/anc:researcher Z",
+  "quero entender profundamente W", "monte um material sobre", "estudar tema", "aprender sobre",
+  "pesquisar sobre", "preciso de material didático sobre". Estrutura obrigatória: (1) conceituação
+  teórica e contextualização → (2) aprofundamento gradual em camadas → (3) exemplos práticos → (4) um
+  exercício ou projeto proposto → (5) bibliografia comentada. Entrega final: arquivo `aula-<slug>.md`
+  no diretório de trabalho atual — Markdown auto-contido com citações, código, fórmulas e diagramas
+  Mermaid embutidos. Sem assunto: pergunte qual tema abordar antes de prosseguir.
+  Não use para: pesquisa acadêmica formal sem propósito didático; resumo de artigo único; tradução;
+  produção de conteúdo de marketing; ou geração de apresentação de slides (esta skill produz texto
+  para leitura linear, não deck para palestra).
 ---
 
 # researcher
 
 ## Objetivo
 
-Levar o usuário de "não sei" a "sei e sei aplicar" sobre um assunto, em **uma sessão única, autocontida**, ancorada em referências bibliográficas reais. A entrega é uma apresentação Reveal.js consumível por leitura no navegador (não exige um palestrante ao vivo).
+Levar o usuário de "não sei" a "sei e sei aplicar" sobre um assunto, em **uma sessão única, autocontida**, ancorada em referências bibliográficas reais. A entrega é um documento Markdown legível em qualquer visualizador (GitHub, Obsidian, VSCode, Typora) — sem dependência de framework de apresentação.
 
 ## Postura obrigatória
 
@@ -31,8 +32,8 @@ Levar o usuário de "não sei" a "sei e sei aplicar" sobre um assunto, em **uma 
 
 ## Detecção de modo
 
-- **Sem assunto** ou pedido genérico ("/researcher", "me ensina algo legal") → vá para [§Coleta de tema](#passo-1--coleta-de-tema-quando-aplicável).
-- **Com assunto** ("/researcher fundamentos de programação funcional", "explique tensores em álgebra linear", "quero entender LGPD aplicada a SaaS") → vá direto para [§Calibração](#passo-2--calibração-de-audiência-e-escopo).
+- **Sem assunto** ou pedido genérico ("/anc:researcher", "me ensina algo legal") → vá para [§Coleta de tema](#passo-1--coleta-de-tema-quando-aplicável).
+- **Com assunto** ("/anc:researcher fundamentos de programação funcional", "explique tensores em álgebra linear", "quero entender LGPD aplicada a SaaS") → vá direto para [§Calibração](#passo-2--calibração-de-audiência-e-escopo).
 
 ---
 
@@ -43,7 +44,7 @@ Se o usuário não indicou tema, faça **uma única mensagem** com 4 perguntas p
 1. **Qual assunto?** (seja específico — "redes neurais" é amplo demais; "como redes neurais convolucionais reconhecem imagens" é ensinável em uma sessão).
 2. **Nível de partida** — leigo total, iniciante com noções, intermediário, avançado.
 3. **Objetivo de aprendizado** — entender para conversar, aplicar profissionalmente, decidir adoção, base para estudo posterior.
-4. **Tempo/profundidade** — visão geral (~20 slides, leitura de 15 min) ou aprofundamento (~40 slides, leitura de 40 min).
+4. **Profundidade** — visão geral (~1.500 palavras, leitura de 10 min) ou aprofundamento (~5.000 palavras, leitura de 30+ min).
 
 Não prossiga sem as 4 respostas.
 
@@ -59,14 +60,14 @@ Se o usuário não corrigir em 1 mensagem, prossiga.
 
 ## Passo 3 — Mapeamento bibliográfico
 
-Use [research-sources](#fontes) e o [protocolo anti-alucinação](references/citation-rules.md#protocolo-anti-alucinação). Para o tema confirmado, monte um mapa com:
+Use as [fontes](#fontes) e o [protocolo anti-alucinação](references/citation-rules.md#protocolo-anti-alucinação). Para o tema confirmado, monte um mapa com:
 
 - **2–3 obras-âncora** (livros canônicos do campo). Verifique existência via WebSearch antes de citar.
 - **2–4 papers seminais ou capítulos clássicos** quando aplicável.
 - **1–2 obras de divulgação acessível** (entry-level confiável — não pop-science enganosa).
 - **Quando aplicável: documentação oficial / norma técnica / RFC** (especialmente para temas de tecnologia, direito, engenharia).
 
-Para cada obra: registrar autor, ano, título, editora/journal, ISBN/DOI quando disponível, e **um excerto curto** (até 3 frases) que será citado nos slides. Se não conseguir confirmar a existência da obra, descarte-a.
+Para cada obra: registrar autor, ano, título, editora/journal, ISBN/DOI quando disponível, e **um excerto curto** (até 3 frases) que será citado no documento. Se não conseguir confirmar a existência da obra, descarte-a.
 
 ### Fontes
 
@@ -80,94 +81,102 @@ Evite: blog de SEO genérico, conteúdo gerado por IA não atribuído, paráfras
 
 ## Passo 4 — Estruturação pedagógica
 
-Monte o roteiro da apresentação seguindo a sequência canônica abaixo. Os 5 blocos são obrigatórios; o número de slides varia conforme o budget escolhido em §Coleta.
+Monte o documento seguindo a sequência canônica abaixo. Os 5 blocos são obrigatórios; o tamanho varia conforme o budget escolhido em §Coleta.
 
-### Bloco 1 — Contextualização e conceito (≈ 15–25% dos slides)
-- **Capa** com título, recorte, autor (Claude/researcher), data.
+### Bloco 1 — Contextualização e conceito (≈ 15–25% do documento)
+- **Cabeçalho** com título, recorte, pré-requisitos, tempo estimado, objetivo de aprendizagem.
 - **Por que importa** — gancho concreto, problema real, ou pergunta motivadora.
 - **Origem e contexto histórico** — quando, onde, por quem o campo/conceito surgiu, com citação primária.
-- **Definição central** — em 1 slide, citação direta da obra-âncora + tradução em linguagem simples.
-- **Pré-requisitos rápidos** — recapitular pré-requisitos em 1–2 slides se necessário.
+- **Definição central** — citação direta da obra-âncora + tradução em linguagem simples.
+- **Pré-requisitos rápidos** — recapitular pré-requisitos quando necessário.
 
-### Bloco 2 — Aprofundamento gradual (≈ 35–45% dos slides)
+### Bloco 2 — Aprofundamento gradual (≈ 35–45% do documento)
 - Quebrar o tema em **camadas** que vão do simples ao complexo. Cada camada:
-  - 1 slide de "ideia da camada"
-  - 1–2 slides de detalhamento
-  - 1 slide de mini-exemplo concreto
+  - 1 parágrafo de "ideia da camada"
+  - Detalhamento em bullets ou prosa curta
+  - Mini-exemplo concreto
   - Citação ancorando a camada quando houver autoridade clara
-- Use diagramas/esquemas (Mermaid ou SVG inline) sempre que ajudarem.
-- Ao final do bloco, 1 slide de **síntese visual** conectando as camadas.
+- Use diagramas (Mermaid em fenced blocks) sempre que ajudarem a relacionar conceitos.
+- Ao final do bloco, **síntese** conectando as camadas (parágrafo + diagrama opcional).
 
-### Bloco 3 — Exemplos práticos (≈ 15–25% dos slides)
+### Bloco 3 — Exemplos práticos (≈ 15–25% do documento)
 - **Mínimo 2 exemplos**, idealmente cobrindo casos diferentes (caso típico + caso-limite, ou domínio A + domínio B).
 - Cada exemplo: contexto → aplicação do conceito → resultado → o que aprender.
 - Para temas de programação/matemática: incluir código ou cálculo passo a passo (worked example).
 
-### Bloco 4 — Exercício ou projeto proposto (≈ 5–10% dos slides)
+### Bloco 4 — Exercício ou projeto proposto (≈ 5–10% do documento)
 - **Um único** exercício ou projeto, claro e dimensionado.
 - Estrutura:
   - **Objetivo** (o que o usuário entrega ao terminar)
   - **Pré-requisitos materiais** (linguagem, ferramenta, dado, fonte)
   - **Passos sugeridos** (3–6 passos numerados)
-  - **Critérios de pronto** (como saber que terminou bem — objetivos, não subjetivos)
+  - **Critérios de pronto** (como saber que terminou bem — objetivos, não subjetivos; usar checkboxes `- [ ]`)
   - **Extensões opcionais** (2–3 caminhos para aprofundar mais)
 
-### Bloco 5 — Bibliografia comentada (≈ 5–10% dos slides)
+### Bloco 5 — Bibliografia comentada (≈ 5–10% do documento)
 - Lista das obras citadas, com 1 linha comentando para quem cada uma é mais útil.
 - **Trilha de leitura** sugerida em 3 níveis: introdutório → intermediário → avançado.
 - Indicação de próximos passos de estudo.
 
-### Padrões de slide
-Detalhes de cada tipo de slide (capa, conceito, citação, exemplo, exercício, bibliografia) estão em [templates/slide-patterns.md](templates/slide-patterns.md).
+### Padrões de seção
+Detalhes de cada tipo de seção (cabeçalho, citação, checkpoint, exemplo, exercício, bibliografia) estão em [templates/section-patterns.md](templates/section-patterns.md).
 
-## Passo 5 — Geração do Reveal.js
+## Passo 5 — Geração do Markdown
 
-Gere um **único arquivo HTML** auto-contido em `aula-<slug>.html` no diretório de trabalho atual, baseado em [templates/presentation.html](templates/presentation.html). Diretrizes:
+Gere um **único arquivo** em `aula-<slug>.md` no diretório de trabalho atual, baseado em [templates/aula.md](templates/aula.md). Diretrizes:
 
-- **Tema padrão:** `white` com fonte serifada para corpo de texto (legibilidade longa). Permita ao usuário pedir `night`/`black` para modo escuro.
-- **CDN do Reveal.js:** carregue da `unpkg.com` ou `cdn.jsdelivr.net` em versão pinada. Evite latest.
-- **Plugins padrão:** `markdown`, `highlight`, `notes`, `math` (KaTeX). Carregue só os necessários.
-- **Notas de palestrante** (`<aside class="notes">`) em cada slide com contexto extra que o leitor pode acessar pressionando `S`.
-- **Navegação:** suporte teclado (setas, espaço) e progresso visível. `controls: true`, `progress: true`.
-- **Responsividade:** `width: 1280, height: 800, margin: 0.08`. Texto não deve estourar slide — quebre em vertical (`<section>` aninhado) se necessário.
-- **Acessibilidade:** contraste mínimo AA, sem transições agressivas (`transition: 'fade'`).
-- **Citações:** use `<blockquote>` com `<cite>` indicando autor/ano/página. Excerto em itálico, atribuição abaixo.
-- **Código:** blocos `<pre><code class="language-X">` com `data-trim data-noescape`.
-- **Math:** `\\(...\\)` para inline, `\\[...\\]` para display. Confirmar que KaTeX renderiza.
-- **Diagramas:** Mermaid via plugin opcional, ou SVG inline. Não usar imagens externas (mantenha self-contained).
+- **Slug do nome:** kebab-case derivado do tema confirmado (ex.: `aula-algebra-linear-para-ml.md`).
+- **Encoding:** UTF-8.
+- **Quebras de linha:** uma frase por linha não é necessário — escreva parágrafos naturais, mas separe blocos lógicos por linha em branco.
+- **Cabeçalhos:** `#` para título único da aula; `##` para os 5 blocos; `###` para subseções; nunca pular níveis.
+- **Citações:** use `>` (blockquote) com excerto em itálico e atribuição na linha seguinte iniciada por `—`. Exemplo:
+  ```markdown
+  > *"Excerto literal, máximo 3 frases."*
+  >
+  > — Sobrenome, *Título*, ano, p. XX
+  ```
+- **Código:** fenced blocks com linguagem declarada (` ```python `, ` ```javascript `, ` ```sql `).
+- **Math:** LaTeX inline com `$...$`, display com `$$...$$`. (GitHub e a maioria dos visualizadores Markdown modernos renderizam.)
+- **Diagramas:** Mermaid em fenced block ` ```mermaid ` para diagramas de fluxo, sequência, classes, ER, etc. Para diagramas que Mermaid não cobre, descreva em texto e use ASCII art simples.
+- **Checkpoints de recuperação ativa:** caixa Markdown:
+  ```markdown
+  > **🔄 Checkpoint** — antes de seguir, responda mentalmente:
+  > 1. Pergunta 1
+  > 2. Pergunta 2
+  >
+  > <details><summary>Gabarito</summary>Resposta esperada…</details>
+  ```
+- **Exercício — critérios de pronto:** sempre usar checkboxes `- [ ]` para que o leitor possa marcar progresso.
+- **Bibliografia:** lista numerada com formato APA 7 (ou ABNT se contexto exigir), seguida de linha em itálico com comentário breve. Detalhes em [citation-rules.md](references/citation-rules.md#padrão-de-citação-visual).
+- **Tabela de conteúdos:** sempre incluir logo após o cabeçalho, com links âncora para cada bloco.
+- **Self-contained:** sem dependência de imagens externas. Quando precisar de uma figura, prefira diagrama Mermaid; em último caso, descrever em palavras.
 
 Após gerar, declare ao usuário:
 1. Caminho do arquivo gerado.
-2. Como abrir (`open aula-<slug>.html` no macOS).
-3. Atalhos úteis (S = notas, F = fullscreen, ESC = visão geral, ? = ajuda).
-
-## Passo 6 — Entrega complementar (opcional, sob demanda)
-
-Se o usuário pedir, produza também:
-- **`aula-<slug>.md`** — versão texto-corrido, ideal para releitura linear sem navegador.
-- **PDF** — instrução para exportar via Reveal.js print mode (`?print-pdf` na URL).
+2. Visualizadores recomendados (`Visualização Markdown` do VSCode, GitHub se commitar, Obsidian, Typora).
+3. Como exportar PDF se desejar (Pandoc: `pandoc aula-<slug>.md -o aula.pdf --pdf-engine=tectonic`).
 
 ## Saída esperada
 
 Ao final, o usuário tem:
-1. Apresentação Reveal.js auto-contida, pronta para abrir.
-2. Bibliografia verificável dentro da própria apresentação.
+1. Arquivo Markdown auto-contido, legível em qualquer editor moderno.
+2. Bibliografia verificável dentro do próprio documento.
 3. Um exercício/projeto com critérios objetivos para praticar o aprendizado.
 4. Trilha de leitura sugerida para próximos passos.
 
 ## Anti-padrões a recusar
 
 - **Citar obras sem verificar.** Fabricar referência é falha grave. Quando não verificável, ou se omite ou se marca explicitamente como "tradição da área, sem fonte primária verificada".
-- **Encher a apresentação de palavras.** Slide é apoio visual — máximo ~40 palavras por slide. Conteúdo extenso vai para notas de palestrante.
+- **Encher o documento de prosa decorativa.** Cada parágrafo precisa entregar conteúdo. Sem "introduções" do tipo "neste tópico vamos aprender…".
 - **Saltar etapas.** Pular dos pré-requisitos para o caso avançado quebra o aprendizado. Sempre incluir camadas intermediárias.
-- **Exercício vago** ("estude mais sobre o assunto"). O exercício precisa ser executável e ter critério de pronto.
+- **Exercício vago** ("estude mais sobre o assunto"). O exercício precisa ser executável e ter critério de pronto verificável.
 - **Tom marketeiro.** Sem "incrível", "poderoso", "essencial". Tom é didático, sereno, preciso.
 - **Ignorar o nível declarado.** Se o usuário disse "leigo total", não largar Lebesgue na cara dele.
+- **Conteúdo extenso sem estrutura.** Markdown sem cabeçalhos de seção e sem TOC é parede de texto. Quebre.
 
 ## Referências
 
 - [pedagogy.md](references/pedagogy.md) — Feynman, Bloom, carga cognitiva, worked examples, espaçamento.
 - [citation-rules.md](references/citation-rules.md) — ABNT/APA, protocolo anti-alucinação de referências.
-- [revealjs-setup.md](references/revealjs-setup.md) — sintaxe, plugins, configurações de qualidade.
-- [templates/presentation.html](templates/presentation.html) — esqueleto Reveal.js pronto.
-- [templates/slide-patterns.md](templates/slide-patterns.md) — padrões para cada tipo de slide.
+- [templates/aula.md](templates/aula.md) — esqueleto Markdown pronto.
+- [templates/section-patterns.md](templates/section-patterns.md) — padrões para cada tipo de seção.

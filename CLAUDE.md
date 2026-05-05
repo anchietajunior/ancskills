@@ -83,4 +83,4 @@ Não criar comandos fora do namespace `anc:`.
 ## Skills existentes
 
 - **`saas-idealizer`** — `/anc:saas-idealizer [área opcional]` — atua como investidor-pesquisador honesto para idealizar e validar micro-SaaS; sem área pesquisa 3 nichos, com área conduz entrevista cirúrgica e emite veredito (SEGUIR/ITERAR/MATAR) com plano em 3 fases.
-- **`researcher`** — `/anc:researcher [tema opcional]` — professor que ensina assunto complexo de forma simples com aprofundamento gradual e referências verificáveis; entrega apresentação Reveal.js (`aula-<slug>.html`) auto-contida com 5 blocos: contextualização, aprofundamento, exemplos práticos, exercício proposto, bibliografia comentada.
+- **`researcher`** — `/anc:researcher [tema opcional]` — professor que ensina assunto complexo de forma simples com aprofundamento gradual e referências verificáveis; entrega arquivo Markdown auto-contido (`aula-<slug>.md`, com Mermaid e LaTeX embutidos) em 5 blocos: contextualização, aprofundamento, exemplos práticos, exercício proposto, bibliografia comentada.
