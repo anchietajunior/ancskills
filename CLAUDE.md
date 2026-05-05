@@ -63,7 +63,13 @@ O usuário desta coleção exige que cada skill incorpore as **melhores técnica
 
 ### Convenção de comandos
 
-Cada skill é invocada por um **comando dedicado**. Documente o gatilho no `description` e, quando útil, registre um slash-command em `.claude/commands/<comando>.md` que aponta para a skill — isso torna a invocação explícita (`/<comando>`) além da invocação implícita por descrição.
+Todos os slash-commands deste repositório vivem sob o namespace `anc:`. Concretamente:
+
+- Arquivos em `.claude/commands/anc/<comando>.md` são invocados como `/anc:<comando>`.
+- Cada skill em `.claude/skills/<nome>/SKILL.md` tem um slash-command correspondente em `.claude/commands/anc/<nome>.md`.
+- O `description` do frontmatter da SKILL.md também permite invocação implícita por linguagem natural; o slash-command é o atalho explícito.
+
+Não criar comandos fora do namespace `anc:`.
 
 ## Fluxo de criação de uma nova skill
 
@@ -76,4 +82,5 @@ Cada skill é invocada por um **comando dedicado**. Documente o gatilho no `desc
 
 ## Skills existentes
 
-- **`saas-idealizer`** — `/saas-idealizer [área opcional]` — atua como investidor-pesquisador honesto para idealizar e validar micro-SaaS; sem área pesquisa 3 nichos, com área conduz entrevista cirúrgica e emite veredito (SEGUIR/ITERAR/MATAR) com plano em 3 fases.
+- **`saas-idealizer`** — `/anc:saas-idealizer [área opcional]` — atua como investidor-pesquisador honesto para idealizar e validar micro-SaaS; sem área pesquisa 3 nichos, com área conduz entrevista cirúrgica e emite veredito (SEGUIR/ITERAR/MATAR) com plano em 3 fases.
+- **`researcher`** — `/anc:researcher [tema opcional]` — professor que ensina assunto complexo de forma simples com aprofundamento gradual e referências verificáveis; entrega apresentação Reveal.js (`aula-<slug>.html`) auto-contida com 5 blocos: contextualização, aprofundamento, exemplos práticos, exercício proposto, bibliografia comentada.

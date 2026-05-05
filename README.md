@@ -20,7 +20,7 @@ Toda skill segue uma postura de **profundidade real**: pesquisa em fontes autori
 
 1. Clone o repositório dentro do diretório de trabalho onde você usa Claude Code, ou copie o conteúdo de `.claude/` para o `.claude/` do seu projeto.
 2. Inicie o Claude Code no diretório.
-3. Invoque uma skill pelo seu slash-command (ex.: `/saas-idealizer`) ou descreva sua necessidade em linguagem natural — o agente decidirá se usa a skill aplicável.
+3. Invoque uma skill pelo seu slash-command sob o namespace `anc:` (ex.: `/anc:saas-idealizer`, `/anc:researcher`) ou descreva sua necessidade em linguagem natural — o agente decidirá se usa a skill aplicável.
 
 ---
 
@@ -39,7 +39,7 @@ Every skill follows a posture of **genuine depth**: research from authoritative 
 
 1. Clone this repository into the working directory where you use Claude Code, or copy the contents of `.claude/` into your project's `.claude/`.
 2. Start Claude Code in that directory.
-3. Invoke a skill by its slash-command (e.g. `/saas-idealizer`) or describe your need in natural language — the agent will decide whether to apply the matching skill.
+3. Invoke a skill by its slash-command under the `anc:` namespace (e.g. `/anc:saas-idealizer`, `/anc:researcher`) or describe your need in natural language — the agent will decide whether to apply the matching skill.
 
 > **Note:** the skills themselves are written in PT-BR per author preference. They work seamlessly with English prompts, but generated artifacts (reports, plans) will be delivered in Portuguese unless you explicitly request another language.
 
@@ -49,7 +49,8 @@ Every skill follows a posture of **genuine depth**: research from authoritative 
 
 | Skill | Comando · Command | Objetivo (PT-BR) | Purpose (EN) |
 |---|---|---|---|
-| [`saas-idealizer`](.claude/skills/saas-idealizer/SKILL.md) | `/saas-idealizer [área opcional]` | Atua como investidor-pesquisador honesto para idealizar e validar micro-SaaS. Sem área, pesquisa 3 nichos promissores e pede escolha. Com área/projeto, conduz entrevista cirúrgica estilo Mom Test, faz pesquisa externa de concorrentes e mercado, e emite veredito acionável (`SEGUIR` / `ITERAR` / `MATAR`) com Lean Canvas, ICP, monetização, matriz competitiva e plano de execução em 3 fases (validação pré-build → MVP cobrável → tração). | Acts as an honest investor-researcher to ideate and validate micro-SaaS opportunities. Without an area, it researches 3 promising niches and asks the user to pick one. With an area/project, it runs a Mom Test–style surgical interview, performs external competitor and market research, and delivers an actionable verdict (`PROCEED` / `ITERATE` / `KILL`) with Lean Canvas, ICP, monetization, competitive matrix, and a 3-phase execution plan (pre-build validation → billable MVP → traction). |
+| [`saas-idealizer`](.claude/skills/saas-idealizer/SKILL.md) | `/anc:saas-idealizer [área opcional]` | Atua como investidor-pesquisador honesto para idealizar e validar micro-SaaS. Sem área, pesquisa 3 nichos promissores e pede escolha. Com área/projeto, conduz entrevista cirúrgica estilo Mom Test, faz pesquisa externa de concorrentes e mercado, e emite veredito acionável (`SEGUIR` / `ITERAR` / `MATAR`) com Lean Canvas, ICP, monetização, matriz competitiva e plano de execução em 3 fases (validação pré-build → MVP cobrável → tração). | Acts as an honest investor-researcher to ideate and validate micro-SaaS opportunities. Without an area, it researches 3 promising niches and asks the user to pick one. With an area/project, it runs a Mom Test–style surgical interview, performs external competitor and market research, and delivers an actionable verdict (`PROCEED` / `ITERATE` / `KILL`) with Lean Canvas, ICP, monetization, competitive matrix, and a 3-phase execution plan (pre-build validation → billable MVP → traction). |
+| [`researcher`](.claude/skills/researcher/SKILL.md) | `/anc:researcher [tema opcional]` | Professor que explica assuntos complexos de forma simples, com aprofundamento gradual e lógico, ancorado em referências bibliográficas verificáveis (com excertos das obras). Entrega final: apresentação Reveal.js auto-contida (`aula-<slug>.html`) com 5 blocos — contextualização teórica → aprofundamento em camadas → exemplos práticos → 1 exercício/projeto proposto → bibliografia comentada com trilha de leitura. Sem tema, pergunta ao usuário antes de prosseguir. | Acts as a professor explaining complex subjects clearly, with gradual logical depth and verifiable bibliographic references (including excerpts from primary works). Final deliverable: a self-contained Reveal.js presentation (`aula-<slug>.html`) with 5 blocks — theoretical contextualization → layered deepening → practical examples → 1 proposed exercise/project → annotated bibliography with reading path. Without a topic, it asks the user first. |
 
 ---
 
@@ -60,8 +61,8 @@ ancskills/
 ├── CLAUDE.md                       # diretrizes para Claude Code · Claude Code guidelines
 ├── README.md                       # este arquivo · this file
 └── .claude/
-    ├── commands/                   # slash-commands (1 por skill · 1 per skill)
-    │   └── <skill>.md
+    ├── commands/anc/               # slash-commands no namespace anc: (1 por skill · 1 per skill)
+    │   └── <skill>.md              # invocado como /anc:<skill>
     └── skills/
         └── <skill>/
             ├── SKILL.md            # frontmatter + procedimento · frontmatter + procedure
